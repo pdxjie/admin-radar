@@ -2,6 +2,7 @@ package com.pdx.radar.mapper;
 
 import com.pdx.radar.pojo.UserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 派大星
  * @since 2023-02-13
  */
+@Mapper
 public interface UserRoleMapper extends BaseMapper<UserRole> {
 
 }
