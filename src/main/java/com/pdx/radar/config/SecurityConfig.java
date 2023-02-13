@@ -1,5 +1,7 @@
 package com.pdx.radar.config;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.pdx.radar.mapper.UserMapper;
 import com.pdx.radar.pojo.User;
 import com.pdx.radar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
 
     @Autowired
     private CustomAccessDeniedHandler customAccessDeniedHandler;
@@ -72,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService(){
         return username -> {
-            User userOne = userService.userInfoByToken(username);
+            User userOne = userMapper.selectOne(new QueryWrapper<User>().eq("user_name",username));
             if (null != userOne){
                 return userOne;
             }
