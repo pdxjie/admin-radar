@@ -1,5 +1,6 @@
 package com.pdx.radar.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pdx.radar.common.DataResult;
 import com.pdx.radar.common.JwtUtils;
 import com.pdx.radar.exception.BusinessException;
@@ -70,5 +71,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         resultMap.put("token",token);
         resultMap.put("tokenHead",tokenHead);
         return DataResult.success(resultMap);
+    }
+
+    @Override
+    public User userInfoByToken(String username) {
+        User user = baseMapper.selectOne(new QueryWrapper<User>().eq("user_name", username).eq("enabled",true));
+        user.setPassword(null);
+        return user;
     }
 }

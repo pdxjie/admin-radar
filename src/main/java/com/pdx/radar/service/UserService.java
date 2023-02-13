@@ -19,4 +19,6 @@ public interface UserService extends IService<User> {
 
     DataResult login(LoginVo loginVo, HttpServletRequest request);
 
+    User userInfoByToken(String username);
+
 }
