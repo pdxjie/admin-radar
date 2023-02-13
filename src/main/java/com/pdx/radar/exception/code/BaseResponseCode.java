@@ -9,7 +9,8 @@ public enum BaseResponseCode implements ResponseCodeInterface{
 
     SUCCESS(200,"操作成功"),
     SYSTEM_ERROR(501,"系统异常，请稍后再试.."),
-    METHOD_IDENTITY_ERROR(402,"数据校验异常"),
+    METHOD_IDENTITY_ERROR(402,"尚未登录，请登录"),
+    PERMISSION_IS_NOT_ENOUGH(403,"权限不足，请联系管理员"),
     USER_IS_NOT_EXIST_OR_ERROR(201,"用户信息不存在或密码错误"),
     ACCOUNT_LOCKED(202,"账号被禁用，请联系管理员"),
     ;
