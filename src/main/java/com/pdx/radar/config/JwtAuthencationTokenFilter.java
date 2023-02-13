@@ -1,6 +1,7 @@
 package com.pdx.radar.config;
 
 import com.pdx.radar.common.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,30 +26,27 @@ public class JwtAuthencationTokenFilter extends OncePerRequestFilter {
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
-
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-
-    @Resource
-    private JwtUtils jwtUtils;
-
-    @Resource
+    @Autowired
+    private JwtUtils jwtTokenUtil;
+    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(tokenHeader);
         //存在token
-        if (null != authHeader && authHeader.startsWith(tokenHead)){
-            String accessToken = authHeader.substring(tokenHead.length());
-            UserDetails userDetails = jwtUtils.getUserDetailsByToken(accessToken);
-            //token存在 用户名 但是未登录
-            if (null != userDetails.getUsername() && null != SecurityContextHolder.getContext().getAuthentication()){
+        if (authHeader != null && authHeader.startsWith(tokenHead)){
+            String authToken = authHeader.substring(tokenHead.length()+1);
+            String username = jwtTokenUtil.getUserNameFromToken(authToken);
+            //未登录，token 存在用户名
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                 //登录
-                UserDetails userDetail = userDetailsService.loadUserByUsername(userDetails.getUsername());
-                //判断token是否有效
-                if (jwtUtils.validateToken(accessToken,userDetail)){
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetail,null,userDetail.getAuthorities());
+                UserDetails user = userDetailsService.loadUserByUsername(username);
+                //判断token是否有效,重新设置用户对象
+                if (jwtTokenUtil.validateToken(authToken,user)){
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
