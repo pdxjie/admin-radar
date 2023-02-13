@@ -58,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new BusinessException(BaseResponseCode.USER_IS_NOT_EXIST_OR_ERROR);
         }
         //判断是否被禁用
-        if (userDetails.isEnabled()){
+        if (!userDetails.isEnabled()){
             throw new BusinessException(BaseResponseCode.ACCOUNT_LOCKED);
         }
         //更新Security登录用户对象
@@ -66,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //将其放在Security的全局中
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-        String token = jwtUtils.generatorToken(userDetails);
+        String token = jwtUtils.generateToken(userDetails);
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("token",token);
         resultMap.put("tokenHead",tokenHead);

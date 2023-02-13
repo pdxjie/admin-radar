@@ -28,7 +28,7 @@ public class LoginController {
 
     @ApiOperation(value = "登录接口 返回token")
     @PostMapping("/login")
-    public DataResult login(LoginVo loginVo, HttpServletRequest request){
+    public DataResult login(@RequestBody LoginVo loginVo, HttpServletRequest request){
         return userService.login(loginVo,request);
     }
 
