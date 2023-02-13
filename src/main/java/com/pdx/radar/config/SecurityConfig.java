@@ -67,9 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                //允许登录
-                .antMatchers("/radar/login","/radar/logout")
-                .permitAll()
                 //除了上面的都要登录
                 .anyRequest()
                 .authenticated()
