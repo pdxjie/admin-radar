@@ -1,18 +1,26 @@
 package com.pdx.radar.service.impl;
 
 import com.pdx.radar.common.DataResult;
+import com.pdx.radar.common.JwtUtils;
+import com.pdx.radar.exception.BusinessException;
+import com.pdx.radar.exception.code.BaseResponseCode;
 import com.pdx.radar.pojo.User;
 import com.pdx.radar.mapper.UserMapper;
 import com.pdx.radar.pojo.vo.LoginVo;
 import com.pdx.radar.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,6 +35,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Resource
     private UserDetailsService userDetailsService;
+    @Resource
+    private PasswordEncoder passwordEncoder;
+    @Resource
+    private JwtUtils jwtUtils;
+    @Value("${jwt.tokenHead}")
+    private String tokenHead;
 
 
     /**
@@ -38,9 +52,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public DataResult login(LoginVo loginVo, HttpServletRequest request) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginVo.getUsername());
-        if (null == userDetails){
-
+        //判断用户是否存在
+        if (null == userDetails || !passwordEncoder.matches(loginVo.getPassword(),userDetails.getPassword())){
+            throw new BusinessException(BaseResponseCode.USER_IS_NOT_EXIST_OR_ERROR);
         }
-        return null;
+        //判断是否被禁用
+        if (userDetails.isEnabled()){
+            throw new BusinessException(BaseResponseCode.ACCOUNT_LOCKED);
+        }
+        //更新Security登录用户对象
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+        //将其放在Security的全局中
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+        String token = jwtUtils.generatorToken(userDetails);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("token",token);
+        resultMap.put("tokenHead",tokenHead);
+        return DataResult.success(resultMap);
     }
 }
