@@ -19,9 +19,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("r_dept")
-@ApiModel(value="Dept对象", description="")
-public class Dept implements Serializable {
+@TableName("r_menu_role")
+@ApiModel(value="MenuRole对象", description="")
+public class MenuRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,20 +29,11 @@ public class Dept implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "部门名称")
-    private String name;
+    @ApiModelProperty(value = "菜单id")
+    private Integer mId;
 
-    @ApiModelProperty(value = "父id")
-    private Integer parentId;
-
-    @ApiModelProperty(value = "路径")
-    private String depPath;
-
-    @ApiModelProperty(value = "是否启用")
-    private Boolean enabled;
-
-    @ApiModelProperty(value = "是否上级")
-    private Boolean isParent;
+    @ApiModelProperty(value = "权限id")
+    private Integer rId;
 
 
 }

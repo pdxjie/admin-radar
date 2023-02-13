@@ -1,6 +1,6 @@
 package com.pdx.radar.service;
 
-import com.pdx.radar.pojo.Log;
+import com.pdx.radar.pojo.UserRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
-public interface LogService extends IService<Log> {
+public interface UserRoleService extends IService<UserRole> {
 
 }

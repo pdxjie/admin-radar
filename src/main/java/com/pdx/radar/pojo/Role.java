@@ -2,9 +2,10 @@ package com.pdx.radar.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,52 +15,28 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("r_role")
+@ApiModel(value="Role对象", description="")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-      @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private String id;
+    @ApiModelProperty(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    /**
-     * 角色名
-     */
+    @ApiModelProperty(value = "名称")
     private String name;
 
-    /**
-     * 角色类型
-     */
-    private Integer type;
+    @ApiModelProperty(value = "角色名称")
+    private String nameZh;
 
-    /**
-     * 状态
-     */
-    private Integer status;
-
-    /**
-     * 备注
-     */
-    private String remark;
-
-    /**
-     * 操作人
-     */
-    private String operator;
-
-    private Date createTime;
-
-    /**
-     * 操作IP
-     */
-    private String operateIp;
+    @ApiModelProperty(value = "是否激活")
+    private Integer enabled;
 
 
 }

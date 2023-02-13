@@ -2,9 +2,10 @@ package com.pdx.radar.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,67 +15,43 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("r_user")
+@ApiModel(value="User对象", description="")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-      @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private String id;
+    @ApiModelProperty(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    /**
-     * 用户名
-     */
-    private String username;
+    @ApiModelProperty(value = "姓名")
+    private String nickName;
 
-    /**
-     * 手机号
-     */
-    private String mobile;
+    @ApiModelProperty(value = "手机号码")
+    private String phone;
 
-    /**
-     * 邮箱
-     */
-    private String mail;
+    @ApiModelProperty(value = "邮箱地址")
+    private String email;
 
-    /**
-     * 密码
-     */
+    @ApiModelProperty(value = "是否启用")
+    private Boolean enabled;
+
+    @ApiModelProperty(value = "用户名")
+    private String userName;
+
+    @ApiModelProperty(value = "密码")
     private String password;
 
-    /**
-     * 备注
-     */
+    @ApiModelProperty(value = "用户头像")
+    private String avatar;
+
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    /**
-     * 部门ID
-     */
-    private String deptId;
-
-    /**
-     * 状态
-     */
-    private Integer status;
-
-    /**
-     * 操作人
-     */
-    private String operator;
-
-    private Date createTime;
-
-    /**
-     * 操作IP
-     */
-    private String operateIp;
 
 
 }

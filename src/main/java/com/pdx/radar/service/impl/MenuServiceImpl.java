@@ -1,9 +1,9 @@
 package com.pdx.radar.service.impl;
 
-import com.pdx.radar.pojo.Log;
+import com.pdx.radar.pojo.Menu;
+import com.pdx.radar.mapper.MenuMapper;
+import com.pdx.radar.service.MenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.pdx.radar.mapper.LogMapper;
-import com.pdx.radar.service.LogService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
 @Service
-public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogService {
+public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
 }

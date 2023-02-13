@@ -1,6 +1,6 @@
 package com.pdx.radar.mapper;
 
-import com.pdx.radar.pojo.Permission;
+import com.pdx.radar.pojo.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
-public interface PermissionMapper extends BaseMapper<Permission> {
+public interface EmployeeMapper extends BaseMapper<Employee> {
 
 }

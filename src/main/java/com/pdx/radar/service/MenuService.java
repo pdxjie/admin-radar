@@ -1,6 +1,6 @@
 package com.pdx.radar.service;
 
-import com.pdx.radar.pojo.RoleUser;
+import com.pdx.radar.pojo.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
-public interface RoleUserService extends IService<RoleUser> {
+public interface MenuService extends IService<Menu> {
 
 }

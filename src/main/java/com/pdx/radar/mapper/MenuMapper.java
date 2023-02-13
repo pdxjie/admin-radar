@@ -1,6 +1,6 @@
 package com.pdx.radar.mapper;
 
-import com.pdx.radar.pojo.RoleUser;
+import com.pdx.radar.pojo.Menu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
-public interface RoleUserMapper extends BaseMapper<RoleUser> {
+public interface MenuMapper extends BaseMapper<Menu> {
 
 }

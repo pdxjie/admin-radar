@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author 派大星
- * @since 2023-02-12
+ * @since 2023-02-13
  */
 @RestController
-@RequestMapping("/radar/role-user")
-public class RoleUserController {
+@RequestMapping("/radar/user/role")
+public class UserRoleController {
 
 }
 
