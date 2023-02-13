@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .title("雷达权限管理系统接口文档")
                 .version("v1.0")
                 .description("雷达权限管理系统接口文档")
-                .contact(new Contact("radar","http://localhost:8088/doc.html","pdx_jie@163.com"))
+                .contact(new Contact("派大星","http://localhost:8088/doc.html","pdx_jie@163.com"))
                 .build();
     }
 }
