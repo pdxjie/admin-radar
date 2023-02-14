@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pdx.radar.mapper.RoleMapper">
 
+    <select id="getRolesById" resultType="com.pdx.radar.pojo.Role">
+        SELECT
+            r.id,
+            r.name,
+            r.name_zh
+        FROM
+            r_role AS r
+                LEFT JOIN r_user_role ur ON r.id = ur.r_id
+        WHERE ur.u_id = #{userId}
+    </select>
 </mapper>

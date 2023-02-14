@@ -1,11 +1,13 @@
 package com.pdx.radar.service;
 
 import com.pdx.radar.common.DataResult;
+import com.pdx.radar.pojo.Role;
 import com.pdx.radar.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pdx.radar.pojo.vo.LoginVo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -20,5 +22,7 @@ public interface UserService extends IService<User> {
     DataResult login(LoginVo loginVo, HttpServletRequest request);
 
     User userInfoByToken(String username);
+
+    List<Role> getRolesById(int userId);
 
 }

@@ -5,7 +5,9 @@ import com.pdx.radar.common.DataResult;
 import com.pdx.radar.common.JwtUtils;
 import com.pdx.radar.exception.BusinessException;
 import com.pdx.radar.exception.code.BaseResponseCode;
+import com.pdx.radar.mapper.RoleMapper;
 import com.pdx.radar.pojo.Menu;
+import com.pdx.radar.pojo.Role;
 import com.pdx.radar.pojo.User;
 import com.pdx.radar.mapper.UserMapper;
 import com.pdx.radar.pojo.vo.LoginVo;
@@ -46,6 +48,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Resource
     private RedisTemplate redisTemplate;
+
+    @Resource
+    private RoleMapper roleMapper;
 
     @Resource
     private JwtUtils jwtUtils;
@@ -101,6 +106,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User userInfoByToken(String username) {
         User user = baseMapper.selectOne(new QueryWrapper<User>().eq("username", username).eq("enabled",false));
         user.setPassword(null);
+        user.setRoles(roleMapper.getRolesById(user.getId()));
         return user;
+    }
+
+    /**
+     * 根据用户id获取角色列表
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Role> getRolesById(int userId) {
+        return roleMapper.getRolesById(userId);
     }
 }
