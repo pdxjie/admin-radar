@@ -38,8 +38,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserDetailsService userDetailsService;
     @Resource
     private PasswordEncoder passwordEncoder;
+
     @Resource
     private JwtUtils jwtUtils;
+
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
