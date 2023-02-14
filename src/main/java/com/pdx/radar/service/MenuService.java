@@ -1,5 +1,6 @@
 package com.pdx.radar.service;
 
+import com.pdx.radar.common.DataResult;
 import com.pdx.radar.pojo.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MenuService extends IService<Menu> {
 
+    DataResult getMenusByUserId();
 }
