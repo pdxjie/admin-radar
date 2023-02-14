@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/radar/login",
                         "/radar/logout",
+                        "/radar/captcha",
                         "/css/**",
                         "/js/**",
                         "/index.html",
