@@ -42,7 +42,7 @@ public class CustomUrlDecisionManager implements AccessDecisionManager {
                 }
             }
         }
-        throw new BusinessException(BaseResponseCode.PERMISSION_IS_NOT_ENOUGH);
+        throw new AccessDeniedException("权限不足，请联系管理员！");
     }
 
     @Override

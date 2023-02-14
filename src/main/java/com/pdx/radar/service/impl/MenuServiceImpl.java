@@ -55,6 +55,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<Menu> getMenusByRole() {
         List<Menu> menus = baseMapper.getMenusByRole();
-        return null;
+        return menus;
     }
 }
