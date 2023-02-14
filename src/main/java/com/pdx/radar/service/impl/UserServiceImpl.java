@@ -58,9 +58,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new BusinessException(BaseResponseCode.USER_IS_NOT_EXIST_OR_ERROR);
         }
         //判断是否被禁用
-        if (!userDetails.isEnabled()){
+        if (userDetails.isEnabled()){
             throw new BusinessException(BaseResponseCode.ACCOUNT_LOCKED);
         }
+
         //更新Security登录用户对象
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
         //将其放在Security的全局中
@@ -75,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User userInfoByToken(String username) {
-        User user = baseMapper.selectOne(new QueryWrapper<User>().eq("user_name", username).eq("enabled",true));
+        User user = baseMapper.selectOne(new QueryWrapper<User>().eq("username", username).eq("enabled",false));
         user.setPassword(null);
         return user;
     }

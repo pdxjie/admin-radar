@@ -89,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public UserDetailsService userDetailsService(){
         return username -> {
-            User userOne = userMapper.selectOne(new QueryWrapper<User>().eq("user_name",username));
+            User userOne = userMapper.selectOne(new QueryWrapper<User>().eq("username",username));
             if (null != userOne){
                 return userOne;
             }

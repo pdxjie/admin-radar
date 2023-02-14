@@ -1,5 +1,6 @@
 package com.pdx.radar.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,7 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("r_user")
+@TableName(value = "r_user",autoResultMap = true)
 @ApiModel(value="User对象", description="")
 public class User implements Serializable, UserDetails {
 
@@ -46,7 +47,7 @@ public class User implements Serializable, UserDetails {
     private Boolean enabled;
 
     @ApiModelProperty(value = "用户名")
-    private String userName;
+    private String username;
 
     @ApiModelProperty(value = "密码")
     private String password;
@@ -65,7 +66,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
