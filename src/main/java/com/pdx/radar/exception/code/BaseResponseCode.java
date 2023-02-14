@@ -13,6 +13,8 @@ public enum BaseResponseCode implements ResponseCodeInterface{
     PERMISSION_IS_NOT_ENOUGH(403,"权限不足，请联系管理员"),
     USER_IS_NOT_EXIST_OR_ERROR(201,"用户信息不存在或密码错误"),
     ACCOUNT_LOCKED(202,"账号被禁用，请联系管理员"),
+    CAPTCHA_CODE_IS_ERROR(203,"验证码结果错误"),
+    CODE_IS_NOT_EXISTS(204,"验证码已失效"),
     ;
 
     /*
