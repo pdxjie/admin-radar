@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-02-13
  */
 @RestController
-@RequestMapping("/radar/menu/role")
+@RequestMapping("/radar/mr")
 public class MenuRoleController {
 
 }
