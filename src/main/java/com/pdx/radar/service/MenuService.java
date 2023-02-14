@@ -4,6 +4,8 @@ import com.pdx.radar.common.DataResult;
 import com.pdx.radar.pojo.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -15,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface MenuService extends IService<Menu> {
 
     DataResult getMenusByUserId();
+
+    List<Menu> getMenusByRole();
 }

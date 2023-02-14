@@ -47,4 +47,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         }
         return DataResult.success(menus);
     }
+
+    /**
+     * 根据角色获取菜单列表
+     * @return
+     */
+    @Override
+    public List<Menu> getMenusByRole() {
+        List<Menu> menus = baseMapper.getMenusByRole();
+        return null;
+    }
 }

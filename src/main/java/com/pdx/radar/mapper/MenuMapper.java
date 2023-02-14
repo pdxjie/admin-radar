@@ -19,4 +19,7 @@ import java.util.List;
 public interface MenuMapper extends BaseMapper<Menu> {
 
     List<Menu> getMenusByUserId(@Param("id") Integer id);
+
+    List<Menu> getMenusByRole();
+
 }

@@ -29,6 +29,16 @@
             <result column="parentId2" property="parentId"/>
         </collection>
     </resultMap>
+
+    <resultMap id="MenusByRole" type="com.pdx.radar.pojo.Menu" extends="BaseResultMap">
+        <collection property="roles" ofType="com.pdx.radar.pojo.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rnameZh" property="nameZh"/>
+            <result column="renabled" property="enabled"/>
+        </collection>
+    </resultMap>
+
     <!--根据用户id查询菜单-->
     <select id="getMenusByUserId" resultMap="Menus">
         SELECT
@@ -59,6 +69,24 @@
             ur.u_id = #{id}
           AND
             m2.enabled = TRUE
+    </select>
+    <!--根据角色获取菜单列表-->
+    <select id="getMenusByRole" resultMap="MenusByRole">
+        SELECT
+            m.*,
+            r.id as rid,
+            r.`name` as rname,
+            r.name_zh as rnameZh,
+            r.enabled as renabled
+        FROM
+            r_menu m,
+            r_menu_role mr,
+            r_role r
+        WHERE
+            m.id = mr.m_id
+          AND
+            r.id = mr.r_id
+        ORDER BY m.id
     </select>
 
 </mapper>
