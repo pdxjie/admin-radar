@@ -18,4 +18,7 @@ public class LoginVo {
 
     @ApiModelProperty(value = "密码",required = true)
     private String password;
+
+    @ApiModelProperty(value = "验证码结果")
+    private String captcha;
 }
