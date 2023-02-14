@@ -2,4 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pdx.radar.mapper.DeptMapper">
 
+    <resultMap id="BaseResultMap" type="com.pdx.radar.pojo.Dept">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="dep_path" property="depPath"/>
+        <result column="enabled" property="enabled"/>
+        <result column="is_parent" property="isParent"/>
+    </resultMap>
+
+    <resultMap id="Depts" type="com.pdx.radar.pojo.Dept" extends="BaseResultMap">
+        <collection property="depts" ofType="com.pdx.radar.pojo.Dept">
+            <id column="id2" property="id"/>
+            <result column="name2" property="name"/>
+            <result column="parentId2" property="parentId"/>
+            <result column="depPath2" property="depPath"/>
+            <result column="enabled2" property="enabled"/>
+            <result column="isParent2" property="isParent"/>
+        </collection>
+    </resultMap>
+
+    <select id="deptTree" resultMap="Depts">
+        SELECT
+            d1.*,
+            d2.id as id2,
+            d2.`name` as name2,
+            d2.parent_id as parentId2,
+            d2.dep_path as depPath2,
+            d2.enabled as enabled2,
+            d2.is_parent as isParent2
+        FROM
+            r_dept d1,
+            r_dept d2
+        WHERE
+            d1.id = d2.parent_id
+          AND
+            d1.enabled = TRUE
+    </select>
 </mapper>
